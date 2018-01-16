@@ -1,7 +1,16 @@
 import React, {Component} from 'react'
+import PropsTypes from 'prop-types'
 import CommentsList from './CommentsList'
 
 export default class Article extends Component {
+	static propTypes = {
+		article: PropsTypes.share({
+			id: PropsTypes.string.isRequired,
+			title: PropsTypes.string.isRequired,
+			text: PropsTypes.string
+		})
+	}
+
 	constructor(props) {
 		super(props);
 

@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import Comment from './Comment'
 
 export default class CommentsList extends Component {
+	static defaultProps = {
+		comments: []
+	}
+
 	state = {
 		isOpen: false
 	};
