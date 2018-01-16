@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import PropsTypes from 'prop-types'
 import CommentsList from './CommentsList'
-import toggleOpen from '../decorators/toggleOpen'
 
 class Article extends Component {
 	static propTypes = {
@@ -46,12 +45,6 @@ class Article extends Component {
 			</section>
 		)
 	}
-
-	toggleOpen = () => {
-		this.setState({
-			isOpen: !this.state.isOpen
-		})
-	}
 }
 
-export default toggleOpen(Article)
+export default Article
