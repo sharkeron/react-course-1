@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 import PropsTypes from 'prop-types'
 import CommentsList from './CommentsList'
 
-class Article extends Component {
+class Article extends PureComponent {
 	static propTypes = {
 		article: PropsTypes.shape({
 			id: PropsTypes.string.isRequired,
@@ -11,13 +11,13 @@ class Article extends Component {
 		})
 	};
 
-	constructor(props) {
-		super(props);
+	state = {
+		updateIndex: 0
+	};
 
-		this.state = {
-			isOpen: false
-		}
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	return nextProps.isOpen !== this.props.isOpen
+	// }
 
 	render() {
 		const {article, isOpen, toggleOpen} = this.props;
@@ -41,7 +41,8 @@ class Article extends Component {
 		return (
 			<section>
 				{article.text}
-				<CommentsList comments={article.comments}/>
+				<button onClick={() => this.setState({updateIndex: this.state.updateIndex + 1})}>update</button>
+				<CommentsList comments={article.comments} key={this.state.updateIndex}/>
 			</section>
 		)
 	}
