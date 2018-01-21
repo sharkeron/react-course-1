@@ -1,14 +1,18 @@
 import React, {Component, PureComponent} from 'react'
 import PropsTypes from 'prop-types'
 import CommentsList from './CommentsList'
+import {CSSTransitionGroup} from 'react-transition-group'
+import './article.css'
 
 class Article extends PureComponent {
 	static propTypes = {
-		article: PropsTypes.shape({
-			id: PropsTypes.string.isRequired,
+		article   : PropsTypes.shape({
+			id   : PropsTypes.string.isRequired,
 			title: PropsTypes.string.isRequired,
-			text: PropsTypes.string
-		})
+			text : PropsTypes.string
+		}).isRequired,
+		isOpen    : PropsTypes.bool,
+		toggleOpen: PropsTypes.func
 	};
 
 	state = {
@@ -28,7 +32,16 @@ class Article extends PureComponent {
 				<button onClick={toggleOpen}>
 					{isOpen ? 'close' : 'open'}
 				</button>
-				{this.getBody()}
+				<CSSTransitionGroup
+					transitionName="article"
+					transitionAppear
+					transitionEnterTimeout={300}
+					transitionLeaveTimeout={500}
+					transitionAppearTimeout={500}
+					component="div"
+				>
+					{this.getBody()}
+				</CSSTransitionGroup>
 			</div>
 		)
 	}
