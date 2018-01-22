@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ArticleList from './ArticleList'
 import UserForm from './UserForm'
 import Select from 'react-select'
+import Filters from './Filters'
 import 'react-select/dist/react-select.css'
 
 class App extends Component {
@@ -10,27 +11,17 @@ class App extends Component {
 
 	};
 
-	state = {
-		selection: null
-	};
-
-	render () {
+	render() {
 		const {articles} = this.props;
-		const options = this.props.articles.map(article => ({
-			label: article.title,
-			value : article.id
-		}));
 
 		return (
 			<div>
-				<UserForm/>
-				<Select options={options} value={this.state.selection} onChange={this.changeSelection} multi/>
-				<ArticleList articles={articles} defaultOpenId={articles[0].id}/>
+				<UserForm />
+				<Filters articles = {articles} />
+				<ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
 			</div>
 		)
 	}
-
-	changeSelection = selection => this.setState({selection})
 }
 
 export default App
